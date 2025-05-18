@@ -41,3 +41,9 @@ build/*
 .vscode
 *.pdb
 
+#python virtual environment
+.venv
+
+CMakeCache.txt
+CMakeFiles/
+

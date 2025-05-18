@@ -1,6 +1,7 @@
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
-
+from conan.tools.scm import Git
+from conan.tools.build import check_min_cppstd
 
 class ilc_deltaRecipe(ConanFile):
     name = "ilc-delta"
@@ -21,10 +22,13 @@ class ilc_deltaRecipe(ConanFile):
     exports_sources = "CMakeLists.txt", "src/*"
 
     def requirements(self):
-        self.requires("zlib/1.2.11")
+        self.requires("immer/0.8.1")
 
     def layout(self):
         cmake_layout(self)
+
+    def validate(self):
+        check_min_cppstd(self, "20")
 
     def generate(self):
         deps = CMakeDeps(self)
