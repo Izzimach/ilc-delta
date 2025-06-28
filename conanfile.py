@@ -28,7 +28,7 @@ class ilc_deltaRecipe(ConanFile):
         cmake_layout(self)
 
     def validate(self):
-        check_min_cppstd(self, "20")
+        check_min_cppstd(self, "23")
 
     def generate(self):
         deps = CMakeDeps(self)
@@ -45,6 +45,3 @@ class ilc_deltaRecipe(ConanFile):
         cmake = CMake(self)
         cmake.install()
 
-    
-
-    

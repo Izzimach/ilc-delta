@@ -1,11 +1,7 @@
 #include <iostream>
-#include "ilc-delta.h"
-
-#include <immer/vector.hpp>
-#include "tanuki.hpp"
+#include "ilc-delta.hpp"
 
 void ilc_delta(){
-    
 
     #ifdef NDEBUG
     std::cout << "ilc-delta/1.0: Hello World Release!\n";
