@@ -23,6 +23,7 @@ class ilc_deltaRecipe(ConanFile):
 
     def requirements(self):
         self.requires("immer/0.8.1")
+        self.requires("catch2/3.8.1")
 
     def layout(self):
         cmake_layout(self)

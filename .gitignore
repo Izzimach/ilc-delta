@@ -33,6 +33,7 @@
 
 
 # cmake products
+conan/*
 out/*
 build/*
 
