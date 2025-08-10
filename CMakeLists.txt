@@ -9,6 +9,7 @@ find_package(immer REQUIRED)
 add_library(ilc-delta
     src/ilc-delta.hpp
     src/replaceable.hpp
+    src/tuple.hpp
     )
 
 target_include_directories(ilc-delta PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -28,5 +29,8 @@ install(TARGETS ilc-main ilc-delta DESTINATION "."
         ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib
         )
+
+
+# tests
 
 add_subdirectory(tests)

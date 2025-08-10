@@ -5,6 +5,7 @@ include(Catch)
 
 set(TEST_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/replaceable_test.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tuple_test.cpp
 )
 
 add_executable(unit_tests ${TEST_SOURCES})

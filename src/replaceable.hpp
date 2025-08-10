@@ -1,7 +1,13 @@
 #include "ilc-delta.hpp"
 
+namespace ilc {
+
 template <typename T>
 struct Replacing : public std::optional<T> {
+    static auto no_diff() -> Replacing<T> {
+        return {std::nullopt};
+    }
+
     auto operator+(const Replacing<T>& other) const -> Replacing<T> {
         if (other.has_value()) {
             return {*other};
@@ -44,11 +50,12 @@ struct Replaceable {
         return value_;
     }
 
-    auto diff(const Replaceable& other) const -> Replacing<T> {
-        T v = other.complete();
-        if (value_ != v) {
-            return {v};
+    static auto diff(const T& left, const T& right) -> Replacing<T> {
+        if (left != right) {
+            return {right};
         }
         return {std::nullopt};
     }
 };
+
+} // namespace ilc
