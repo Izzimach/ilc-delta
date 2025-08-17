@@ -33,7 +33,7 @@ struct Tuple {
         };
     }
 
-    ValueType complete() const {
+    auto complete() const -> ValueType{
         A a = A::init(std::get<0>(value_)).patch(std::get<0>(delta_));
         B b = B::init(std::get<1>(value_)).patch(std::get<1>(delta_));
         return {a.complete(), b.complete()};

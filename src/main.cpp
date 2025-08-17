@@ -8,12 +8,11 @@
 #include "tanuki.hpp"
 
 int main() {
-  ilc_delta();
 
   std::vector<std::string> vec;
   vec.push_back("test_package");
-  ilc_delta_print_vector(vec);
-
+  std::cout << "Package: " << vec[0] << "\n";
+  
   const auto v0 = immer::vector<int>();
   const auto v1 = v0.push_back(13);
   std::cout << v1[0] << "\n";

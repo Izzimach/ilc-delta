@@ -43,7 +43,7 @@ struct Replaceable {
         };
     }
     
-    T complete() const {
+    auto complete() const -> T{
         if (delta_.has_value()) {
             return *delta_;
         }
@@ -56,6 +56,33 @@ struct Replaceable {
         }
         return {std::nullopt};
     }
+
+    // standard way to modify a Replaceable: x.put(new_value)
+    auto put(const T&& new_value) const -> Replaceable<T> {
+        return patch(DeltaType{new_value});
+    }
 };
+
+// predefined replaceable types
+using r_float = Replaceable<float>;
+using r_double = Replaceable<double>;
+using r_int = Replaceable<int>;
+using r_uint = Replaceable<unsigned int>;
+using r_int16 = Replaceable<int16_t>;
+using r_uint16 = Replaceable<uint16_t>;
+using r_int8 = Replaceable<int8_t>;
+using r_uint8 = Replaceable<uint8_t>;
+using r_string = Replaceable<std::string>;
+
+// predefined replacing types
+using rp_float = Replacing<float>;
+using rp_double = Replacing<double>;
+using rp_int = Replacing<int>;
+using rp_uint = Replacing<unsigned int>;
+using rp_int16 = Replacing<int16_t>;
+using rp_uint16 = Replacing<uint16_t>;
+using rp_int8 = Replacing<int8_t>;
+using rp_uint8 = Replacing<uint8_t>;
+using rp_string = Replacing<std::string>;
 
 } // namespace ilc
