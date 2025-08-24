@@ -66,6 +66,8 @@ struct MultiSet {
                 C complete_count = std::max(complete_value[key] + change, C(0));
                 if (complete_count > 0) {
                     complete_value.set(key, complete_count);
+                } else {
+                    complete_value.erase(key);
                 }
             }
         }

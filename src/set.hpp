@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ilc-delta.hpp"
+#include "multiset.hpp"
+
 #include <immer/set.hpp>
 #include <immer/set_transient.hpp>
 
@@ -124,5 +126,29 @@ struct Set {
         };
     }
 };
+
+template <typename T, typename C, typename D>
+auto MultiSetToSet(const MultiSet<T,C,D>& ms) -> Set<T> {
+    immer::set<T> base_set;
+    for (const auto& [key, count] : ms.value_) {
+        base_set = base_set.insert(key);
+    }
+
+    AddRemoveSet<T> delta_set;
+    for (const auto& [key, change] : ms.delta_) {
+        auto original_count = ms.value_.find(key);
+        if (original_count == nullptr && change > 0) {
+            // adding something to the set
+            delta_set = delta_set.add(key);
+        } else if (*original_count + change <= 0) {
+            delta_set = delta_set.remove(key);
+        }
+    }
+
+    return {
+        .value_ = base_set,
+        .delta_ = delta_set
+    };
+}
 
 }
