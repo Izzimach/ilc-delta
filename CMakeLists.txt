@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.30)
 project(ilc-delta CXX)
 set(CMAKE_CXX_STANDARD 23)
+include(FetchContent)
 
 find_package(immer REQUIRED)
 
@@ -11,6 +12,7 @@ add_library(ilc-delta
     src/replaceable.hpp
     src/tuple.hpp
     src/multiset.hpp
+    src/set.hpp
     )
 
 target_include_directories(ilc-delta PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
