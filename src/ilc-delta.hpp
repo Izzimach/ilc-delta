@@ -8,9 +8,7 @@ namespace ilc {
 
 template <typename T>
 concept IsDeltaType = requires (T d1, T d2) {
-  { T::no_diff() } -> std::same_as<T>;
   { d1 + d2 } -> std::same_as<T>;
-  { d1.split() } -> std::same_as<std::optional<std::tuple<T,T>>>;
 };
 
 template <typename T>

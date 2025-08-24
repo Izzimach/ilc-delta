@@ -19,7 +19,7 @@ struct Tuple {
     static auto init(const ValueType& value) -> Tuple<A, B> {
         return {
             .value_ = value,
-            .delta_ = std::make_tuple(A::DeltaType::no_diff(), B::DeltaType::no_diff())
+            .delta_ = std::make_tuple<typename A::DeltaType, typename B::DeltaType>({},{})
         };
     }
 

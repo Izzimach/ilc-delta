@@ -7,7 +7,7 @@
 namespace ilc {
 
 template<typename T, typename C = unsigned int, typename D = int>
-struct Multiset {
+struct MultiSet {
     using ValueType = immer::map<T,C>;
     using DeltaType = immer::map<T,D>;
     using TransientDeltaType = immer::map_transient<T,D>;
@@ -15,14 +15,14 @@ struct Multiset {
     ValueType value_;
     DeltaType delta_;
 
-    static auto init(const ValueType& value) -> Multiset<T, C, D> {
+    static auto init(const ValueType& value) -> MultiSet<T, C, D> {
         return {
             .value_ = value,
             .delta_ = {}
         };
     }
 
-    auto diff(const ValueType& left, const ValueType& right) -> DeltaType {
+    static auto diff(const ValueType& left, const ValueType& right) -> DeltaType {
         TransientDeltaType delta;
         for (const auto& [key, count] : left) {
             if (right.find(key) == right.end()) {
@@ -42,7 +42,7 @@ struct Multiset {
         return delta.persistent();
     }
 
-    auto patch(const DeltaType& new_delta) const -> Multiset<T, C, D> {
+    auto patch(const DeltaType& new_delta) const -> MultiSet<T, C, D> {
         TransientDeltaType transient_delta = delta_.transient();
         for (const auto& [key, change] : new_delta) {
             if (transient_delta.find(key) != transient_delta.end()) {
@@ -73,7 +73,7 @@ struct Multiset {
     }
 
     // typically you increment/decrement elements
-    auto increment(const T& key, D count = 1) -> Multiset<T, C, D> {
+    auto increment(const T& key, D count = 1) -> MultiSet<T, C, D> {
         TransientDeltaType transient_delta = delta_.transient();
         if (transient_delta.find(key) != nullptr) {
             transient_delta.update(key, [=](auto c) { return c + count;});
@@ -89,7 +89,7 @@ struct Multiset {
         };
     }
 
-    auto decrement(const T& key, D count = 1) -> Multiset<T, C, D> {
+    auto decrement(const T& key, D count = 1) -> MultiSet<T, C, D> {
         TransientDeltaType transient_delta = delta_.transient();
         if (transient_delta.find(key) != nullptr) {
             transient_delta.update(key,[=](auto c) { return c - count;});

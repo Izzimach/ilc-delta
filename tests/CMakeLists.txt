@@ -7,6 +7,7 @@ set(TEST_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/replaceable_test.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tuple_test.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/multiset_test.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/set_test.cpp
 )
 
 add_executable(unit_tests ${TEST_SOURCES})

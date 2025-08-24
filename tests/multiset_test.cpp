@@ -5,7 +5,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 TEST_CASE("Multiset basic operations", "[basic][multiset]") {
-    auto t1 = ilc::Multiset<int>::init(immer::map<int,unsigned int>{});
+    auto t1 = ilc::MultiSet<int>::init(immer::map<int,unsigned int>{});
     auto t2 = t1.increment(1).increment(4).increment(1);
 
     REQUIRE(t1.complete().empty());

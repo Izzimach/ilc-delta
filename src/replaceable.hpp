@@ -4,21 +4,12 @@ namespace ilc {
 
 template <typename T>
 struct Replacing : public std::optional<T> {
-    static auto no_diff() -> Replacing<T> {
-        return {std::nullopt};
-    }
-
     auto operator+(const Replacing<T>& other) const -> Replacing<T> {
         if (other.has_value()) {
             return {*other};
         }
         return *this;
     };
-
-    auto split() const -> std::optional<std::tuple<Replacing<T>, Replacing<T>>> {
-        // can't split Replacing<T>
-        return std::nullopt;
-    }
 };
 
 template <typename T>
